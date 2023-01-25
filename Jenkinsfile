@@ -13,15 +13,15 @@ pipeline {
 
              } 
          }
-            stage('gradle init')
-            {
-                steps{
-                    //sh "./gradlew init"
-                    script{
-                    init()
-                    }
-                }
-            }
+            // stage('gradle init')
+            // {
+            //     steps{
+            //         //sh "./gradlew init"
+            //         script{
+            //         init()
+            //         }
+            //     }
+            // }
             stage('gradle build')
             {
                 steps{

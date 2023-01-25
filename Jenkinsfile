@@ -6,12 +6,12 @@ pipeline {
     stages {
         stage('Github Pull')
          {
-            
-             {
+             steps{
+             
                 // Get some code from a GitHub repository
                 git 'https://github.com/jenkinsci/JenkinsPipelineUnit'
 
-            }
+             } 
          }
             stage('gradle init')
             {

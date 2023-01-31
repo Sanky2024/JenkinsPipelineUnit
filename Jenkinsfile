@@ -1,7 +1,11 @@
 @Library('bshprac') _
 pipeline {
     agent any
-
+    environment
+    {
+        SONARSERVER = 'sonar2'
+        SONARSCANNER = 'sonarscanner'
+    }
     
     stages {
         stage('Github Pull')
@@ -37,6 +41,31 @@ pipeline {
                 script{
                 test()}
             }
+        }
+         stage('CODE ANALYSIS with SONARQUBE')
+        {
+          
+		  environment 
+          {
+             scannerHome = tool "${SONARSCANNER}"
+          }
+
+          steps
+        {
+            withSonarQubeEnv("${SONARSERVER}") 
+            {
+               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=JenkinsPipelineUnit \
+                   -Dsonar.projectName=JenkinsPipelineUnit \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                 
+            }
+
+            timeout(time: 10, unit: 'MINUTES')
+            {
+               waitForQualityGate abortPipeline: true
+            }
+        }
         }
         stage('publish')
         {

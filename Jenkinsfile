@@ -42,8 +42,12 @@ pipeline {
                 test()}
             }
         }
+        
+    
        stage('SonarQube analysis')
        {
+        git 'https://github.com/Sanky2024/vprciproject.git'
+  
         steps
         {
             withSonarQubeEnv('sonar2')

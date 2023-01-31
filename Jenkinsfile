@@ -46,10 +46,11 @@ pipeline {
     
        stage('SonarQube analysis')
        {
-        git 'https://github.com/Sanky2024/vprciproject.git'
-  
+        
         steps
         {
+            git 'https://github.com/Sanky2024/vprciproject.git'
+  
             withSonarQubeEnv('sonar2')
     { // Will pick the global server connection you have configured
       sh './gradlew sonarqube'

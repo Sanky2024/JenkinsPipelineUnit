@@ -42,10 +42,16 @@ pipeline {
                 test()}
             }
         }
-       stage('SonarQube analysis') {
-    withSonarQubeEnv('sonar2') { // Will pick the global server connection you have configured
+       stage('SonarQube analysis')
+       {
+        steps
+        {
+            withSonarQubeEnv('sonar2')
+    { // Will pick the global server connection you have configured
       sh './gradlew sonarqube'
     }
+        }
+    
   }
         stage('publish')
         {
